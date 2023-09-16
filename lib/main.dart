@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Riverpod Tutorial',
+      title: 'Riverpod Basic Concept',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const AppRoot(
-        appBarTitle: 'Riverpod Tutorial',
+        appBarTitle: 'Riverpod Basic Concept',
       ),
     );
   }
