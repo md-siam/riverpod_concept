@@ -6,6 +6,7 @@ import 'pages/provider_page.dart';
 import 'pages/state_notifier_provider_page.dart';
 import 'pages/state_provider_page.dart';
 import 'pages/stream_provider_page.dart';
+import 'widget/simple_button.dart';
 
 class AppRoot extends StatelessWidget {
   final String appBarTitle;
@@ -31,126 +32,58 @@ class AppRoot extends StatelessWidget {
         child: Column(
           children: <Widget>[
             const SizedBox(height: 50),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.primary,
+            SimpleButton(
+              buttonTitle: 'Provider',
+              buttonColor: Theme.of(context).colorScheme.primary,
+              pageWidget: ProviderPage(
+                appBarTitle: 'Provider',
+                color: Theme.of(context).colorScheme.primary,
               ),
-              child: const Text(
-                '- Provider -',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ProviderPage(
-                        appBarTitle: 'Provider',
-                        color: Theme.of(context).colorScheme.primary),
-                  ),
-                );
-              },
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.secondary,
+            SimpleButton(
+              buttonTitle: 'State Provider',
+              buttonColor: Theme.of(context).colorScheme.secondary,
+              pageWidget: StateProviderPage(
+                appBarTitle: 'State Provider',
+                color: Theme.of(context).colorScheme.secondary,
               ),
-              child: const Text(
-                '- State Provider -',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => StateProviderPage(
-                        appBarTitle: 'State Provider',
-                        color: Theme.of(context).colorScheme.secondary),
-                  ),
-                );
-              },
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.tertiary,
+            SimpleButton(
+              buttonTitle: 'Future Provider',
+              buttonColor: Theme.of(context).colorScheme.tertiary,
+              pageWidget: FutureProviderPage(
+                appBarTitle: 'Future Provider',
+                color: Theme.of(context).colorScheme.tertiary,
               ),
-              child: const Text(
-                '- Future Provider -',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => FutureProviderPage(
-                        appBarTitle: 'Future Provider',
-                        color: Theme.of(context).colorScheme.tertiary),
-                  ),
-                );
-              },
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.error,
+            SimpleButton(
+              buttonTitle: 'Stream Provider',
+              buttonColor: Theme.of(context).colorScheme.error,
+              pageWidget: StreamProviderPage(
+                appBarTitle: 'Stream Provider',
+                color: Theme.of(context).colorScheme.error,
               ),
-              child: const Text(
-                '- Stream Provider -',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => StreamProviderPage(
-                        appBarTitle: 'Stream Provider',
-                        color: Theme.of(context).colorScheme.error),
-                  ),
-                );
-              },
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    Theme.of(context).colorScheme.onPrimaryContainer,
+            SimpleButton(
+              buttonTitle: 'Change Notifier Provider',
+              buttonColor: Theme.of(context).colorScheme.onPrimaryContainer,
+              pageWidget: ChangeNotifierProviderPage(
+                appBarTitle: 'Change Notifier Provider',
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
               ),
-              child: const Text(
-                '- Change Notifier Provider -',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ChangeNotifierProviderPage(
-                        appBarTitle: 'Change Notifier Provider',
-                        color:
-                            Theme.of(context).colorScheme.onPrimaryContainer),
-                  ),
-                );
-              },
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.onErrorContainer,
+            SimpleButton(
+              buttonTitle: 'State Notifier Provider',
+              buttonColor: Theme.of(context).colorScheme.onErrorContainer,
+              pageWidget: StateNotifierProviderPage(
+                appBarTitle: 'State Notifier Provider',
+                color: Theme.of(context).colorScheme.onErrorContainer,
               ),
-              child: const Text(
-                '- State Notifier Provider -',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => StateNotifierProviderPage(
-                        appBarTitle: 'State Notifier Provider',
-                        color: Theme.of(context).colorScheme.onErrorContainer),
-                  ),
-                );
-              },
             ),
           ],
         ),
