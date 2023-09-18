@@ -33,82 +33,76 @@ class AppRoot extends StatelessWidget {
           children: <Widget>[
             const SizedBox(height: 50),
             SimpleButton(
-                buttonTitle: 'Provider',
-                buttonColor: Theme.of(context).colorScheme.primary,
-                onTapEvent: () {
-                  _pushPage(
-                    context,
-                    ProviderPage(
-                      appBarTitle: 'Provider',
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  );
-                }),
+              buttonTitle: 'Provider',
+              buttonColor: Theme.of(context).colorScheme.primary,
+              onTapEvent: () => _pushPage(
+                context,
+                ProviderPage(
+                  appBarTitle: 'Provider',
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ),
             const SizedBox(height: 20),
             SimpleButton(
-                buttonTitle: 'State Provider',
-                buttonColor: Theme.of(context).colorScheme.secondary,
-                onTapEvent: () {
-                  _pushPage(
-                    context,
-                    StateProviderPage(
-                      appBarTitle: 'State Provider',
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-                  );
-                }),
+              buttonTitle: 'State Provider',
+              buttonColor: Theme.of(context).colorScheme.secondary,
+              onTapEvent: () => _pushPage(
+                context,
+                StateProviderPage(
+                  appBarTitle: 'State Provider',
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+            ),
             const SizedBox(height: 20),
             SimpleButton(
-                buttonTitle: 'Future Provider',
-                buttonColor: Theme.of(context).colorScheme.tertiary,
-                onTapEvent: () {
-                  _pushPage(
-                    context,
-                    FutureProviderPage(
-                      appBarTitle: 'Future Provider',
-                      color: Theme.of(context).colorScheme.tertiary,
-                    ),
-                  );
-                }),
+              buttonTitle: 'Future Provider',
+              buttonColor: Theme.of(context).colorScheme.tertiary,
+              onTapEvent: () => _pushPage(
+                context,
+                FutureProviderPage(
+                  appBarTitle: 'Future Provider',
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+              ),
+            ),
             const SizedBox(height: 20),
             SimpleButton(
-                buttonTitle: 'Stream Provider',
-                buttonColor: Theme.of(context).colorScheme.error,
-                onTapEvent: () {
-                  _pushPage(
-                    context,
-                    StreamProviderPage(
-                      appBarTitle: 'Stream Provider',
-                      color: Theme.of(context).colorScheme.error,
-                    ),
-                  );
-                }),
+              buttonTitle: 'Stream Provider',
+              buttonColor: Theme.of(context).colorScheme.error,
+              onTapEvent: () => _pushPage(
+                context,
+                StreamProviderPage(
+                  appBarTitle: 'Stream Provider',
+                  color: Theme.of(context).colorScheme.error,
+                ),
+              ),
+            ),
             const SizedBox(height: 20),
             SimpleButton(
-                buttonTitle: 'Change Notifier Provider',
-                buttonColor: Theme.of(context).colorScheme.onPrimaryContainer,
-                onTapEvent: () {
-                  _pushPage(
-                    context,
-                    ChangeNotifierProviderPage(
-                      appBarTitle: 'Change Notifier Provider',
-                      color: Theme.of(context).colorScheme.onPrimaryContainer,
-                    ),
-                  );
-                }),
+              buttonTitle: 'Change Notifier Provider',
+              buttonColor: Theme.of(context).colorScheme.onPrimaryContainer,
+              onTapEvent: () => _pushPage(
+                context,
+                ChangeNotifierProviderPage(
+                  appBarTitle: 'Change Notifier Provider',
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
+              ),
+            ),
             const SizedBox(height: 20),
             SimpleButton(
-                buttonTitle: 'State Notifier Provider',
-                buttonColor: Theme.of(context).colorScheme.onErrorContainer,
-                onTapEvent: () {
-                  _pushPage(
-                    context,
-                    StateNotifierProviderPage(
-                      appBarTitle: 'State Notifier Provider',
-                      color: Theme.of(context).colorScheme.onErrorContainer,
-                    ),
-                  );
-                }),
+              buttonTitle: 'State Notifier Provider',
+              buttonColor: Theme.of(context).colorScheme.onErrorContainer,
+              onTapEvent: () => _pushPage(
+                context,
+                StateNotifierProviderPage(
+                  appBarTitle: 'State Notifier Provider',
+                  color: Theme.of(context).colorScheme.onErrorContainer,
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -118,9 +112,7 @@ class AppRoot extends StatelessWidget {
   dynamic _pushPage(BuildContext context, Widget page) {
     return Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => page,
-      ),
+      MaterialPageRoute(builder: (context) => page),
     );
   }
 }

@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FutureProviderPage extends StatelessWidget {
+import '../models/suggestion_model.dart';
+import '../services/api_service.dart';
+
+final suggestionFutureProvider =
+    FutureProvider.autoDispose<SuggestionModel>((ref) async {
+  final apiService = ref.watch(apiServiceProvider);
+  return apiService.getSuggestion();
+});
+
+class FutureProviderPage extends ConsumerWidget {
   final String appBarTitle;
   final Color color;
   const FutureProviderPage({
@@ -10,7 +20,9 @@ class FutureProviderPage extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final suggestionRef = ref.watch(suggestionFutureProvider);
+    //
     return Scaffold(
       appBar: AppBar(
         backgroundColor: color,
@@ -20,11 +32,27 @@ class FutureProviderPage extends StatelessWidget {
           style: const TextStyle(color: Colors.white),
         ),
       ),
-      body:  Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: RefreshIndicator(
+        onRefresh: () => ref.refresh(suggestionFutureProvider.future),
+        child: ListView(
           children: [
-            Text(appBarTitle),
+            const SizedBox(height: 100),
+            Center(
+              child: suggestionRef.when(
+                data: (data) {
+                  return Text(
+                    data.activity,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  );
+                },
+                error: (error, _) {
+                  return Text(error.toString());
+                },
+                loading: () {
+                  return CircularProgressIndicator(color: color);
+                },
+              ),
+            ),
           ],
         ),
       ),

@@ -92,3 +92,59 @@ SimpleButton(
   },
 ),
 ```
+
+### 3. Future Provider
+
+**FutureProvider** is the equivalent of Provider but for asynchronous code.
+
+FutureProvider is typically used for:
+
+- performing and caching asynchronous operations (such as network requests)
+- nicely handling error/loading states of asynchronous operations
+- combining multiple asynchronous values into another value
+
+**FutureProvider** gains a lot when combined with ref.watch. This combination allows automatic re-fetching of some data when some variables change, ensuring that we always have the most up-to-date value.
+
+```dart
+final apiServiceProvider = Provider<ApiService>((ref) => ApiService());
+
+class ApiService {
+  Future<SuggestionModel> getSuggestion() async {
+    try {
+      final response = await Dio().get('https://www.boredapi.com/api/activity');
+
+      return SuggestionModel.fromJson(response.data);
+    } catch (e) {
+      throw Exception('Error getting suggestion: $e');
+    }
+  }
+}
+```
+
+For accessing **FutureProvider**
+
+```dart
+final suggestionFutureProvider =
+    FutureProvider.autoDispose<SuggestionModel>((ref) async {
+  final apiService = ref.watch(apiServiceProvider);
+  return apiService.getSuggestion();
+});
+
+
+final suggestionRef = ref.watch(suggestionFutureProvider);
+
+suggestionRef.when(
+  data: (data) {
+    return Text(
+      data.activity,
+      style: Theme.of(context).textTheme.headlineMedium,
+    );
+  },
+  error: (error, _) {
+    return Text(error.toString());
+  },
+  loading: () {
+    return CircularProgressIndicator(color: color);
+  },
+),
+```
