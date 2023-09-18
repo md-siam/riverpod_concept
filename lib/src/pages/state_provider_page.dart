@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_concept/src/widget/simple_button.dart';
 
 final valueStateProvider = StateProvider<int>(
   (ref) => 50,
@@ -47,32 +48,22 @@ class StateProviderPage extends ConsumerWidget {
             const SizedBox(
               height: 20,
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: color),
-              onPressed: () {
+            SimpleButton(
+              buttonTitle: 'Increment',
+              buttonColor: color,
+              onTapEvent: () {
                 ref.read(valueStateProvider.notifier).state++;
               },
-              child: const Text(
-                'Increment',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
             ),
             const SizedBox(
               height: 10,
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: color),
-              onPressed: () {
+            SimpleButton(
+              buttonTitle: 'Invalidate',
+              buttonColor: color,
+              onTapEvent: () {
                 ref.invalidate(valueStateProvider);
               },
-              child: const Text(
-                'Invalidate',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
             ),
           ],
         ),
