@@ -9,15 +9,37 @@
 <img align="right" src="screenshots/app_icon/app_icon_for_android_iOS.png" height="190"></img>
 A new Flutter project.
 
-## Getting Started
+## Six Types of Providers
 
-This project is a starting point for a Flutter application.
+### 1. Provider
 
-A few resources to get you started if this is your first Flutter project:
+Provider is the most basic of all providers. It creates a value... And that's about it.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Provider is typically used for:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- caching computations
+- exposing a value to other providers (such as a Repository/HttpClient).
+- offering a way for tests or widgets to override a value.
+- reducing rebuilds of providers/widgets without having to use select.
+
+```dart
+final valueProvider = Provider<int>(
+  (ref) => 42,
+);
+```
+
+For accessing the valueProvider:
+
+```dart
+Consumer(
+    builder: (context, ref, child) {
+        return Text(
+            'The value is ${ref.watch(valueProvider)}',
+            style: Theme.of(context).textTheme.headlineMedium,
+        );
+    },
+)
+```
+
+
+### 2. State Provider
