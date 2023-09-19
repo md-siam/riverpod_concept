@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/suggestion_model.dart';
 import '../services/api_service.dart';
+import '../widget/my_card.dart';
 
 final suggestionFutureProvider =
     FutureProvider.autoDispose<SuggestionModel>((ref) async {
@@ -56,26 +57,7 @@ class FutureProviderPage extends ConsumerWidget {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                'Pull down to refresh.',
-                                style: TextStyle(
-                                  color: color,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Icon(
-                                Icons.arrow_downward_sharp,
-                                color: color,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      MyCard(color: color),
                     ],
                   );
                 },
