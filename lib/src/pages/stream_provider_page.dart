@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class StreamProviderPage extends StatelessWidget {
+import '../services/stream_service.dart';
+
+final streamValueProvider = StreamProvider.autoDispose<int>((ref) {
+  final streamService = ref.watch(streamServiceProvider);
+  return streamService.getStream();
+});
+
+class StreamProviderPage extends ConsumerWidget {
   final String appBarTitle;
   final Color color;
   const StreamProviderPage({
@@ -10,7 +18,9 @@ class StreamProviderPage extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final streamValue = ref.watch(streamValueProvider);
+    //
     return Scaffold(
       appBar: AppBar(
         backgroundColor: color,
@@ -21,11 +31,21 @@ class StreamProviderPage extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(appBarTitle),
-          ],
+        child: streamValue.when(
+          data: (int data) {
+            return Text(
+              data.toString(),
+              style: Theme.of(context).textTheme.headlineMedium,
+            );
+          },
+          error: (error, _) {
+            return Text(error.toString());
+          },
+          loading: () {
+            return CircularProgressIndicator(
+              color: color,
+            );
+          },
         ),
       ),
     );

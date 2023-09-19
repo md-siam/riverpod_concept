@@ -148,3 +148,63 @@ suggestionRef.when(
   },
 ),
 ```
+
+### 4. Stream Provider
+
+**StreamProvider** is similar to FutureProvider but for Streams instead of Futures.
+
+StreamProvider is usually used for:
+
+- listening to Firebase or web-sockets
+- rebuilding another provider every few seconds
+
+Since Streams naturally expose a way for listening to updates, some may think that using StreamProvider has a low value. In particular, you may believe that Flutter's StreamBuilder would work just as well for listening to a Stream, but this is a mistake.
+
+Using StreamProvider over StreamBuilder has numerous benefits:
+
+- it allows other providers to listen to the stream using ref.watch.
+- it ensures that loading and error cases are properly handled, thanks to AsyncValue.
+- it removes the need for having to differentiate broadcast streams vs normal streams.
+- it caches the latest value emitted by the stream, ensuring that if a listener is added after an event is emitted, the listener will still have immediate access to the most up-to-date event.
+- it allows easily mocking the stream during tests by overriding the StreamProvider.
+
+```dart
+final streamServiceProvider = Provider<StreamService>((ref) {
+  return StreamService();
+});
+
+class StreamService {
+  Stream<int> getStream() {
+    return Stream.periodic(const Duration(seconds: 1), (i) => i).take(10);
+  }
+}
+```
+
+For accessing **StreamProvider**
+
+```dart
+final streamValueProvider = StreamProvider.autoDispose<int>((ref) {
+  final streamService = ref.watch(streamServiceProvider);
+  return streamService.getStream();
+});
+
+
+final streamValue = ref.watch(streamValueProvider);
+
+streamValue.when(
+  data: (int data) {
+    return Text(
+      data.toString(),
+      style: Theme.of(context).textTheme.headlineMedium,
+    );
+  },
+  error: (error, _) {
+    return Text(error.toString());
+  },
+  loading: () {
+    return CircularProgressIndicator(
+      color: color,
+    );
+  },
+),
+```
