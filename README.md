@@ -224,4 +224,50 @@ INFO
  - Consider using ChangeNotifierProvider only if you are absolutely certain that you want mutable state.
 ```
 
+```dart
+final cartNotifierProvider = ChangeNotifierProvider.autoDispose<CartNotifier>(
+  (ref) => CartNotifier(),
+);
 
+class CartNotifier extends ChangeNotifier {
+  final List<ProductModel> _cart = [];
+
+  List<ProductModel> get cart => _cart;
+
+  void addProduct(ProductModel product) {
+    _cart.add(product);
+    notifyListeners();
+  }
+
+  void removeProduct(ProductModel product) {
+    _cart.remove(product);
+    notifyListeners();
+  }
+
+  void clearCart() {
+    _cart.clear();
+    notifyListeners();
+  }
+}
+```
+
+For accessing changeNotifierProvider
+```dart
+final cartNotifier = ref.watch(cartNotifierProvider);
+
+// Show the cart contents
+...cartNotifier.cart
+    .map((item) => Text(item.title))
+
+// Sum the total price of the cart
+Text(
+  'Total: '
+  '\$${cartNotifier.cart.fold<double>(0, (sum, item) => sum + item.price)}',
+  style: Theme.of(context).textTheme.headlineMedium,
+)
+
+// Clear the cart
+ref
+    .read(cartNotifierProvider.notifier)
+    .clearCart();
+```
