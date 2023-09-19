@@ -7,7 +7,21 @@
 # Riverpod Concept
 
 <img align="right" src="screenshots/app_icon/app_icon_for_android_iOS.png" height="190"></img>
-A new Flutter project.
+This repository is simply teach you all six types of provider available in riverpod, and shows you the basic concept of using them. The six types of providers are:
+
+```
+  1. Provider
+  2. State Provider
+  3. Future Provider
+  4. Stream Provider
+  5. Change Notifier Provider (discouraged by Riverpod)
+  6. State Notifier Provider (highly recommended)
+```
+To read the detail documentation about Riverpod, follow this link:  ☞ <a href = "https://riverpod.dev/docs/getting_started">link</a> ☜ <br>
+
+## App Demo
+
+<p align="center"><img src="screenshots/gif/app_demo.gif"></p>
 
 ## Six Types of Providers
 
