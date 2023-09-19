@@ -208,3 +208,20 @@ streamValue.when(
   },
 ),
 ```
+
+### 5. Change Notifier Provider
+
+**ChangeNotifierProvider** (flutter_riverpod/hooks_riverpod only) is a provider that is used to listen to and expose a ChangeNotifier from Flutter itself.
+
+Using ChangeNotifierProvider is **_discouraged_** by Riverpod and exists primarily for:
+
+- an easy transition from package:provider when using its ChangeNotifierProvider
+- supporting mutable state, even though immutable state is preferred
+
+```txt
+INFO
+ - Prefer using StateNotifierProvider instead.
+ - Consider using ChangeNotifierProvider only if you are absolutely certain that you want mutable state.
+```
+
+
