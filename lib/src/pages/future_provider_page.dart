@@ -34,26 +34,35 @@ class FutureProviderPage extends ConsumerWidget {
       ),
       body: RefreshIndicator(
         onRefresh: () => ref.refresh(suggestionFutureProvider.future),
-        child: ListView(
-          children: [
-            const SizedBox(height: 100),
-            Center(
-              child: suggestionRef.when(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: ListView(
+            children: [
+              const SizedBox(height: 100),
+              suggestionRef.when(
                 data: (data) {
-                  return Text(
-                    data.activity,
-                    style: Theme.of(context).textTheme.headlineMedium,
+                  return Card(
+                    elevation: 8.0,
+                    child: ListTile(
+                      title: Text(
+                        data.activity,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                      subtitle: Text(
+                        'Type: ${data.type}',
+                      ),
+                    ),
                   );
                 },
                 error: (error, _) {
                   return Text(error.toString());
                 },
                 loading: () {
-                  return CircularProgressIndicator(color: color);
+                  return LinearProgressIndicator(color: color);
                 },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
