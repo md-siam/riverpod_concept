@@ -252,6 +252,7 @@ class CartNotifier extends ChangeNotifier {
 ```
 
 For accessing changeNotifierProvider
+
 ```dart
 final cartNotifier = ref.watch(cartNotifierProvider);
 
@@ -270,4 +271,53 @@ Text(
 ref
     .read(cartNotifierProvider.notifier)
     .clearCart();
+```
+
+### 6. State Notifier Provider
+
+**StateNotifierProvider** is a provider that is used to listen to and expose a StateNotifier (from the package state_notifier, which Riverpod re-exports).
+StateNotifierProvider along with StateNotifier is Riverpod's recommended solution for managing state which may change in reaction to a user interaction.
+
+It is typically used for:
+
+- exposing an immutable state which can change over time after reacting to custom events.
+- centralizing the logic for modifying some state (aka "business logic") in a single place, improving maintainability over time.
+
+```dart
+final cartStateNotifierProvider =
+    StateNotifierProvider.autoDispose<CartStateNotifier, List<ProductModel>>(
+        (ref) {
+  return CartStateNotifier();
+});
+
+class CartStateNotifier extends StateNotifier<List<ProductModel>> {
+  CartStateNotifier() : super([]);
+
+  void addProduct(ProductModel product) {
+    state = [...state, product];
+  }
+
+  void clearCart() {
+    state = [];
+  }
+}
+```
+
+For accessing the StateNotifierProvider:
+
+```dart
+final cart = ref.watch(cartStateNotifierProvider);
+
+// Show the cart contents
+...cart.map((item) => Text(item.title)),
+
+// Clear the cart
+ref
+    .read(cartStateNotifierProvider.notifier)
+    .clearCart();
+
+// Add the product to the cart
+ref
+    .read(cartStateNotifierProvider.notifier)
+    .addProduct(product);
 ```
