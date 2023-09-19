@@ -41,17 +41,42 @@ class FutureProviderPage extends ConsumerWidget {
               const SizedBox(height: 100),
               suggestionRef.when(
                 data: (data) {
-                  return Card(
-                    elevation: 8.0,
-                    child: ListTile(
-                      title: Text(
-                        data.activity,
-                        style: Theme.of(context).textTheme.headlineMedium,
+                  return Column(
+                    children: [
+                      Card(
+                        elevation: 8.0,
+                        child: ListTile(
+                          title: Text(
+                            data.activity,
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
+                          subtitle: Text(
+                            'Type: ${data.type}',
+                          ),
+                        ),
                       ),
-                      subtitle: Text(
-                        'Type: ${data.type}',
+                      const SizedBox(height: 10),
+                      Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                'Pull down to refresh.',
+                                style: TextStyle(
+                                  color: color,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Icon(
+                                Icons.arrow_downward_sharp,
+                                color: color,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   );
                 },
                 error: (error, _) {

@@ -35,7 +35,7 @@ class StreamProviderPage extends ConsumerWidget {
           data: (int data) {
             return Text(
               data.toString(),
-              style: Theme.of(context).textTheme.headlineMedium,
+              style: Theme.of(context).textTheme.headlineLarge,
             );
           },
           error: (error, _) {
