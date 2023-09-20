@@ -17,7 +17,30 @@ This repository is simply teach you all six types of provider available in river
   5. Change Notifier Provider (discouraged by Riverpod)
   6. State Notifier Provider (highly recommended)
 ```
-To read the detail documentation about Riverpod, follow this link:  ☞ <a href = "https://riverpod.dev/docs/getting_started">link</a> ☜ <br>
+
+To read the detail documentation about Riverpod, follow this link: ☞ <a href = "https://riverpod.dev/docs/getting_started">link</a> ☜ <br>
+
+## Packages used
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # For state management
+  flutter_riverpod: ^2.4.0
+  # For http calls
+  dio: ^5.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # For riverpod state manager
+  riverpod_lint: ^2.1.0
+  # For app icon generator
+  flutter_launcher_icons: ^0.13.1
+```
 
 ## App Demo
 
